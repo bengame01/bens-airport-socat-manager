@@ -11,12 +11,28 @@ permissions:
 
 jobs:
   syntax-check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - ubuntu-26.04
+
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y socat iproute2
+
       - name: Check Bash scripts
         run: bash tests/check-source.sh
+
+      - name: Check Socat
+        run: socat -V
