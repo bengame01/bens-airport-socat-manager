@@ -1,0 +1,22 @@
+# Keep real VPS configs, credentials, backups and keys out of GitHub
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite*
+*.db
+*.log
+*.conf
+*.bak
+*.backup
+*.tar
+*.tar.gz
+*.zip
+backup*/
+backups/
+secrets/
+ssh_keys/
+config-private/
+.DS_Store
